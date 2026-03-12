@@ -2,12 +2,7 @@ $profilePath = $profile | Split-Path -Parent
 $installPath = Join-Path $profilePath "NexShell"
 
 if (Test-Path $installPath) {
-    Write-Host "NexShell already installed at $installPath" -ForegroundColor Yellow
-    $response = Read-Host "Overwrite? (y/n)"
-    if ($response -notmatch "^[Yy]$") {
-        Write-Host "Installation cancelled." -ForegroundColor Red
-        return
-    }
+    Write-Host "Removing previous installation..." -ForegroundColor Yellow
     Remove-Item -Recurse -Force $installPath
 }
 
