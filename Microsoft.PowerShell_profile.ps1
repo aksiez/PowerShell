@@ -1,3 +1,5 @@
+write-host "hi l"
+
 $configPath = Join-Path $PSScriptRoot "config.toml"
 
 $showWelcome = $true
