@@ -1,0 +1,154 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.PowerShell.Commands.PSRepositoryItemInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="Name">PSCompletions</S>
+      <Version N="Version">6.6.0</Version>
+      <S N="Type">Module</S>
+      <S N="Description">A completion manager for a better and simpler tab-completion experience in PowerShell._x000D__x000A_ It provides a more powerful module completion menu with sorting and filtering._x000D__x000A_  - Website: https://pscompletions.abgox.com_x000D__x000A_  - Github:  https://github.com/abgox/PSCompletions_x000D__x000A_  - Gitee:   https://gitee.com/abgox/PSCompletions</S>
+      <S N="Author">abgox</S>
+      <S N="CompanyName">abgox</S>
+      <S N="Copyright">Copyright (c) 2023-present abgox. All Rights Reserved.</S>
+      <DT N="PublishedDate">2026-02-15T04:33:26+02:00</DT>
+      <Obj N="InstalledDate" RefId="1">
+        <DT>2026-02-22T22:09:37.3570664+02:00</DT>
+        <MS>
+          <Obj N="DisplayHint" RefId="2">
+            <TN RefId="1">
+              <T>Microsoft.PowerShell.Commands.DisplayHintType</T>
+              <T>System.Enum</T>
+              <T>System.ValueType</T>
+              <T>System.Object</T>
+            </TN>
+            <ToString>DateTime</ToString>
+            <I32>2</I32>
+          </Obj>
+        </MS>
+      </Obj>
+      <Nil N="UpdatedDate" />
+      <URI N="LicenseUri">https://github.com/abgox/PSCompletions/blob/main/LICENSE</URI>
+      <URI N="ProjectUri">https://pscompletions.abgox.com/</URI>
+      <URI N="IconUri">https://pscompletions.abgox.com/logo.svg</URI>
+      <Obj N="Tags" RefId="3">
+        <TN RefId="2">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>psc</S>
+          <S>Tab</S>
+          <S>Expansion</S>
+          <S>Completion</S>
+          <S>Menu</S>
+          <S>Manager</S>
+          <S>TUI</S>
+          <S>GUI</S>
+          <S>Json</S>
+          <S>Dynamic</S>
+          <S>Multilingual</S>
+          <S>TabExpansion2</S>
+          <S>Completions</S>
+          <S>Prompt</S>
+          <S>PowerShell</S>
+          <S>pwsh</S>
+          <S>Windows</S>
+          <S>Linux</S>
+          <S>MacOS</S>
+          <S>PSModule</S>
+          <S>PSEdition_Core</S>
+          <S>PSEdition_Desktop</S>
+        </LST>
+      </Obj>
+      <Obj N="Includes" RefId="4">
+        <TN RefId="3">
+          <T>System.Collections.Hashtable</T>
+          <T>System.Object</T>
+        </TN>
+        <DCT>
+          <En>
+            <S N="Key">Workflow</S>
+            <Obj N="Value" RefId="5">
+              <TNRef RefId="2" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Obj N="Value" RefId="6">
+              <TNRef RefId="2" />
+              <LST>
+                <S>PSCompletions</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Obj N="Value" RefId="7">
+              <TNRef RefId="2" />
+              <LST>
+                <S>PSCompletions</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="5" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="5" />
+          </En>
+          <En>
+            <S N="Key">DscResource</S>
+            <Ref N="Value" RefId="5" />
+          </En>
+        </DCT>
+      </Obj>
+      <Nil N="PowerShellGetFormatVersion" />
+      <S N="ReleaseNotes">https://github.com/abgox/PSCompletions/blob/main/module/CHANGELOG.md</S>
+      <Obj N="Dependencies" RefId="8">
+        <TNRef RefId="2" />
+        <LST />
+      </Obj>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
+      <S N="Repository">PSGallery</S>
+      <S N="PackageManagementProvider">NuGet</S>
+      <Obj N="AdditionalMetadata" RefId="9">
+        <TN RefId="4">
+          <T>System.Management.Automation.PSCustomObject</T>
+          <T>System.Object</T>
+        </TN>
+        <MS>
+          <S N="copyright">Copyright (c) 2023-present abgox. All Rights Reserved.</S>
+          <S N="description">A completion manager for a better and simpler tab-completion experience in PowerShell._x000D__x000A_ It provides a more powerful module completion menu with sorting and filtering._x000D__x000A_  - Website: https://pscompletions.abgox.com_x000D__x000A_  - Github:  https://github.com/abgox/PSCompletions_x000D__x000A_  - Gitee:   https://gitee.com/abgox/PSCompletions</S>
+          <S N="requireLicenseAcceptance">False</S>
+          <S N="releaseNotes">https://github.com/abgox/PSCompletions/blob/main/module/CHANGELOG.md</S>
+          <S N="isLatestVersion">True</S>
+          <S N="isAbsoluteLatestVersion">True</S>
+          <S N="versionDownloadCount">722</S>
+          <S N="downloadCount">94623</S>
+          <S N="packageSize">71518</S>
+          <S N="published">2/15/2026 4:33:26 AM +02:00</S>
+          <S N="created">2/15/2026 4:33:26 AM +02:00</S>
+          <S N="lastUpdated">2/22/2026 7:50:00 PM +02:00</S>
+          <S N="tags">psc Tab Expansion Completion Menu Manager TUI GUI Json Dynamic Multilingual TabExpansion2 Completions Prompt PowerShell pwsh Windows Linux MacOS PSModule PSEdition_Core PSEdition_Desktop PSFunction_PSCompletions PSCommand_PSCompletions PSIncludes_Function</S>
+          <S N="developmentDependency">False</S>
+          <S N="updated">2026-02-22T19:50:00Z</S>
+          <S N="NormalizedVersion">6.6.0</S>
+          <S N="Authors">abgox</S>
+          <S N="IsPrerelease">false</S>
+          <S N="ItemType">Module</S>
+          <S N="FileList">PSCompletions.nuspec|core.ps1|PSCompletions.psm1|completions\psc\hooks.ps1|completions\psc\language\zh-CN.json|completions\psc\config.json|completions\psc\language\en-US.json|temp\completions.json|PSCompletions.psd1</S>
+          <S N="GUID">00929632-527d-4dab-a5b3-21197faccd05</S>
+          <S N="PowerShellVersion">5.1</S>
+        </MS>
+      </Obj>
+      <S N="InstalledLocation">D:\docs\PowerShell\Modules\PSCompletions\6.6.0</S>
+    </MS>
+  </Obj>
+</Objs>
