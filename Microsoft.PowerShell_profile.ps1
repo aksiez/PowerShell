@@ -31,12 +31,12 @@ if ($showWelcome) {
     if ($lang -eq "français") {
         Write-Host "Bienvenue dans $([char]0x1B)[1mNexShell$([char]0x0F)" -ForegroundColor White
         Write-Host "Ce projet contient ma configuration PowerShell personnelle." -ForegroundColor Gray
-        Write-Host "Pour mettre à jour: utilisez la commande $([char]0x1B)[1mupd$([char]0x0F) ($([char]0x1B)[36mgit pull$([char]0x0F))" -ForegroundColor DarkGray
+        Write-Host "Pour mettre à jour: utilisez la commande $([char]0x1B)[1mupd$([char]0x0F)" -ForegroundColor DarkGray
         Write-Host "Pour recharger le profile: utilisez $([char]0x1B)[1mreload$([char]0x0F)" -ForegroundColor DarkGray
     } else {
         Write-Host "Welcome to $([char]0x1B)[1mNexShell$([char]0x0F)" -ForegroundColor White
         Write-Host "This project contains my personal PowerShell configuration." -ForegroundColor Gray
-        Write-Host "To update: use $([char]0x1B)[1mupd$([char]0x0F) command ($([char]0x1B)[36mgit pull$([char]0x0F))" -ForegroundColor DarkGray
+        Write-Host "To update: use $([char]0x1B)[1mupd$([char]0x0F) command" -ForegroundColor DarkGray
         Write-Host "To reload: use $([char]0x1B)[1mreload$([char]0x0F) command" -ForegroundColor DarkGray
     }
     Write-Host ""
