@@ -1,5 +1,3 @@
-Write-Host "testver!!!" -ForegroundColor Magenta
-
 $configPath = Join-Path $PSScriptRoot "config.toml"
 $lang = "unset"
 
