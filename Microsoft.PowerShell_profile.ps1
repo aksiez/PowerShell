@@ -73,8 +73,10 @@ Start-Sleep -Milliseconds 500
 
 function Get-GitUpdateStatus {
     try {
-        $gitStatus = git -C $PSScriptRoot fetch --dry-run 2>&1
-        if ($LASTEXITCODE -eq 0 -and $gitStatus) {
+        git -C $PSScriptRoot fetch origin main 2>&1 | Out-Null
+        $localCommit = git -C $PSScriptRoot rev-parse HEAD
+        $remoteCommit = git -C $PSScriptRoot rev-parse origin/main
+        if ($localCommit -ne $remoteCommit) {
             if ($lang -eq "français") {
                 return "Mise à jour disponible! Exécutez $([char]0x1B)[1mupd$([char]0x0F) pour mettre à jour."
             } else {
