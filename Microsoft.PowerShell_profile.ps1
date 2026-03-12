@@ -1,4 +1,7 @@
-write-host "hi l"
+. "$PSScriptRoot\Spinner.ps1"
+
+Write-Host ""
+Write-Host "Welcome to $([char]0x1B)[1mNexShell$([char]0x0F)" -ForegroundColor White
 
 $configPath = Join-Path $PSScriptRoot "config.toml"
 
@@ -11,8 +14,6 @@ if (Test-Path $configPath) {
 }
 
 if ($showWelcome) {
-    Write-Host ""
-    Write-Host "Welcome to $([char]0x1B)[1mNexShell$([char]0x0F)" -ForegroundColor White
     Write-Host "This project contains my personal PowerShell configuration." -ForegroundColor Gray
     Write-Host "To update: use $([char]0x1B)[1mupd$([char]0x0F) command" -ForegroundColor DarkGray
     Write-Host "To reload: use $([char]0x1B)[1mreload$([char]0x0F) command" -ForegroundColor DarkGray
@@ -31,59 +32,133 @@ showWelcome = false
     Write-Host ""
 }
 
-Write-Host "Checking for updates..." -ForegroundColor Cyan
+[Console]::CursorVisible = $false
+Write-Host ""
+$spinnerMsg = Get-Random -InputObject $NX_StatusMsgs
+$lastLen = 0
 
-Start-Sleep -Milliseconds 500
-
-function Get-GitUpdateStatus {
-    try {
-        git -C $PSScriptRoot fetch origin main 2>&1 | Out-Null
-        $localCommit = git -C $PSScriptRoot rev-parse HEAD
-        $remoteCommit = git -C $PSScriptRoot rev-parse origin/main
-        if ($localCommit -ne $remoteCommit) {
-            return "Update available! Run $([char]0x1B)[1mupd$([char]0x0F) to update."
-        }
-    } catch {}
-    return $null
-}
-
-function update_line {
-    param([string]$Message = "")
-    $width = $Host.UI.RawUI.BufferSize.Width
-    $clearLine = "`r" + (" " * ($width - 1)) + "`r"
-    Write-Host "$clearLine$Message" -NoNewline
-}
-
-$updateStatus = Get-GitUpdateStatus
-if ($updateStatus) {
-    Write-Host $updateStatus -ForegroundColor Yellow
-    Write-Host "Do you want to update now? (y/n)" -NoNewline
-    $response = Read-Host " "
-    if ($response -match "^[Yy]$") {
-        Write-Host ""
-        update_line "Updating..."
-        git -C $PSScriptRoot pull | Out-Null
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "Update complete. Restart your terminal or use $([char]0x1B)[1mreload$([char]0x0F)." -ForegroundColor Green
+for ($i = 0; $i -lt 12; $i++) { 
+    $braille = $NX_BrailleChars[$i % $NX_BrailleChars.Count]
+    
+    if ($i % 5 -eq 0 -and $i -gt 0) {
+        if ((Get-Random -Minimum 0 -Maximum 1000) -eq 0) {
+            $spinnerMsg = "hi L! :3"
         } else {
-            Write-Host "Update failed." -ForegroundColor Red
+            $spinnerMsg = Get-Random -InputObject $NX_StatusMsgs
         }
-    } else {
-        Write-Host ""
     }
+    
+    $curLen = $braille.Length + $spinnerMsg.Length + 1
+    
+    if ($lastLen -gt 0 -and $lastLen -ne $curLen) {
+        Write-Host ("`r" + (" " * $lastLen) + ("`r")) -NoNewline
+    } elseif ($lastLen -gt 0) {
+        Write-Host ("`r") -NoNewline
+    }
+    
+    Write-Host "$braille $spinnerMsg" -NoNewline
+    $lastLen = $braille.Length + $spinnerMsg.Length + 1
+    Start-Sleep -Milliseconds 100
+}
+
+$updateAvailable = $false
+
+try {
+    $null = git -C $PSScriptRoot fetch origin main 2>&1
+    $localCommit = git -C $PSScriptRoot rev-parse HEAD 2>$null
+    $remoteCommit = git -C $PSScriptRoot rev-parse origin/main 2>$null
+    
+    if ($localCommit -and $remoteCommit -and ($localCommit -ne $remoteCommit)) {
+        $updateAvailable = $true
+    }
+} catch {}
+
+if ($lastLen -gt 0) {
+    Write-Host ("`r" + (" " * $lastLen) + ("`r")) -NoNewline
+}
+[Console]::CursorVisible = $true
+
+if ($updateAvailable) {
+    Write-Host "Update available! Run $([char]0x1B)[1mupd$([char]0x0F) to update." -ForegroundColor Yellow
 } else {
     Write-Host "NexShell is up to date." -ForegroundColor Green
 }
 
+Write-Host ""
+
+$spinnerMsg = Get-Random -InputObject $NX_StatusMsgs
+$lastLen = 0
+
+for ($i = 0; $i -lt 6; $i++) { 
+    $braille = $NX_BrailleChars[$i % $NX_BrailleChars.Count]
+    
+    if ($i % 5 -eq 0 -and $i -gt 0) {
+        if ((Get-Random -Minimum 0 -Maximum 1000) -eq 0) {
+            $spinnerMsg = "hi L! :3"
+        } else {
+            $spinnerMsg = Get-Random -InputObject $NX_StatusMsgs
+        }
+    }
+    
+    $curLen = $braille.Length + $spinnerMsg.Length + 1
+    
+    if ($lastLen -gt 0 -and $lastLen -ne $curLen) {
+        Write-Host ("`r" + (" " * $lastLen) + ("`r")) -NoNewline
+    } elseif ($lastLen -gt 0) {
+        Write-Host ("`r") -NoNewline
+    }
+    
+    Write-Host "$braille $spinnerMsg" -NoNewline
+    $lastLen = $braille.Length + $spinnerMsg.Length + 1
+    Start-Sleep -Milliseconds 100
+}
+
 Get-ChildItem "$PSScriptRoot\functions\*.ps1" | ForEach-Object { 
-    update_line "Loading $($_.Name)"
     . $_.FullName 
 }
 
-update_line ""
+$funcCount = (Get-ChildItem "$PSScriptRoot\functions\*.ps1").Count
 
-update_line "PSReadLine"
+if ($lastLen -gt 0) {
+    Write-Host ("`r" + (" " * $lastLen) + ("`r")) -NoNewline
+}
+[Console]::CursorVisible = $true
+Write-Host "Loaded $funcCount functions" -ForegroundColor Green
+
+$spinnerMsg = Get-Random -InputObject $NX_StatusMsgs
+$lastLen = 0
+
+for ($i = 0; $i -lt 4; $i++) { 
+    $braille = $NX_BrailleChars[$i % $NX_BrailleChars.Count]
+    
+    if ($i % 5 -eq 0 -and $i -gt 0) {
+        if ((Get-Random -Minimum 0 -Maximum 1000) -eq 0) {
+            $spinnerMsg = "hi L! :3"
+        } else {
+            $spinnerMsg = Get-Random -InputObject $NX_StatusMsgs
+        }
+    }
+    
+    $curLen = $braille.Length + $spinnerMsg.Length + 1
+    
+    if ($lastLen -gt 0 -and $lastLen -ne $curLen) {
+        Write-Host ("`r" + (" " * $lastLen) + ("`r")) -NoNewline
+    } elseif ($lastLen -gt 0) {
+        Write-Host ("`r") -NoNewline
+    }
+    
+    Write-Host "$braille $spinnerMsg" -NoNewline
+    $lastLen = $braille.Length + $spinnerMsg.Length + 1
+    Start-Sleep -Milliseconds 100
+}
+
 Set-PSReadLineOption -PredictionSource Plugin
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 
-update_line ""
+if ($lastLen -gt 0) {
+    Write-Host ("`r" + (" " * $lastLen) + ("`r")) -NoNewline
+}
+[Console]::CursorVisible = $true
+Write-Host "PSReadLine ready" -ForegroundColor Green
+
+Write-Host ""
