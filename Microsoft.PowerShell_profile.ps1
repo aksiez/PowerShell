@@ -94,6 +94,33 @@ function Get-GitUpdateStatus {
 $updateStatus = Get-GitUpdateStatus
 if ($updateStatus) {
     Write-Host $updateStatus -ForegroundColor Yellow
+    if ($lang -eq "français") {
+        $prompt = "Voulez-vous mettre à jour maintenant? (o/n)"
+    } else {
+        $prompt = "Do you want to update now? (y/n)"
+    }
+    Write-Host $prompt -NoNewline
+    $response = Read-Host " "
+    if ($response -eq "y" -or $response -eq "Y" -or $response -eq "o" -or $response -eq "O") {
+        Write-Host ""
+        update_line "Updating..."
+        git -C $PSScriptRoot pull | Out-Null
+        if ($LASTEXITCODE -eq 0) {
+            if ($lang -eq "français") {
+                Write-Host "Mise à jour terminée. Redémarrez votre terminal ou utilisez $([char]0x1B)[1mreload$([char]0x0F)." -ForegroundColor Green
+            } else {
+                Write-Host "Update complete. Restart your terminal or use $([char]0x1B)[1mreload$([char]0x0F)." -ForegroundColor Green
+            }
+        } else {
+            if ($lang -eq "français") {
+                Write-Host "Erreur lors de la mise à jour." -ForegroundColor Red
+            } else {
+                Write-Host "Update failed." -ForegroundColor Red
+            }
+        }
+    } else {
+        Write-Host ""
+    }
 } else {
     if ($lang -eq "français") {
         Write-Host "NexShell est à jour." -ForegroundColor Green
