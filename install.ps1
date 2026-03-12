@@ -22,6 +22,16 @@ if (Test-Path $installPath) {
 Write-Host "Cloning NexShell..." -ForegroundColor Cyan
 git clone https://github.com/aksiez/PowerShell.git $installPath
 
+$defaultConfig = @"
+# NexShell Configuration
+
+language = "english"
+showWelcome = true
+"@
+
+$configPath = Join-Path $installPath "config.toml"
+Set-Content -Path $configPath -Value $defaultConfig
+
 $lineToAdd = ". `"$installPath\Microsoft.PowerShell_profile.ps1`""
 
 $profileContent = if (Test-Path $profile) { Get-Content $profile -Raw } else { "" }

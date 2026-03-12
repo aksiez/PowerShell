@@ -49,9 +49,13 @@ if ($showWelcome) {
     }
     $response = Read-Host $disablePrompt
     if ($response -match "^[YyOo]$") {
-        $configContent = Get-Content $configPath -Raw
-        $configContent = $configContent -replace 'showWelcome\s*=\s*true', 'showWelcome = false'
-        Set-Content $configPath -Value $configContent
+        $defaultConfig = @"
+# NexShell Configuration
+
+language = "$lang"
+showWelcome = false
+"@
+        Set-Content -Path $configPath -Value $defaultConfig
         if ($lang -eq "français") {
             Write-Host "Message désactivé. Modifiez $([char]0x1B)[36mconfig.toml$([char]0x0F) pour le réactiver." -ForegroundColor Green
         } else {
